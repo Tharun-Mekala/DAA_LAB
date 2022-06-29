@@ -5,45 +5,43 @@ DEPTH FIRST SEARCH
 
 import java.util.*;
 
-public class DFS {
-	static int V;
+public class Graph {
+	static int nv;
 	static LinkedList<Integer> adj[];
-	@SuppressWarnings("unchecked")DFS(int v)
+	Graph(int n)
 	{
-		this.V = v;
-		adj = new LinkedList[v];
-		for(int i = 0; i < v; i++)
+		nv=n;
+		adj = new LinkedList[n];
+		for(int i = 0; i < n; i++)
 			adj[i] = new LinkedList();
 	}
 	void addEdge(int v, int w)
 	{
 		adj[v].add(w);
 	}
-	void DFSUtil(int v, boolean visited[])
+	void DFSTraversal(int v,boolean[] visited) 
 	{
-		visited[v] = true;
-		System.out.print(v + " ");
-		Iterator<Integer> i = adj[v].listIterator();
-		while(i.hasNext())
+		visited[v]=true;
+		System.out.print(v+" ");
+		Iterator<Integer> it = adj[v].listIterator();
+		while(it.hasNext())
 		{
-			int n = i.next();
-			if(!visited[n])
-			{
-				DFSUtil(n, visited);
-			}
+			int i=i.next();
+			if(!visited[i])
+				DFSTraverssal(i,visited)
 		}
 	}
-	void DFSs(int s)
-	{
-		boolean visited[] = new boolean[V];
-		DFSUtil(s, visited);
-	}
+}
+class DFS
+{
 	public static void main(String[] args) 
 	{
 		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter no of vertices : ");
+		int nv=sc.cextInt();
 		System.out.print("Enter no. of edges : ");
-		int n = sc.nextInt();
-		DFS g = new DFS(n);
+		int ne= sc.nextInt();
+		Graph g = new Graph(nv);
 		System.out.println("Enter edges : ");
 		for(int i = 0; i < n; i++)
 		{
@@ -54,7 +52,8 @@ public class DFS {
 		System.out.print("Enter Source Vertex : ");
 		int s = sc.nextInt();
 		System.out.print("The DFS Traversal is ");
-		g.DFSs(s);
+		boolean[] visited = new boolean[nv];
+		g.DFSs(s,visited);
 		System.out.println();
 		sc.close();
 	}
@@ -63,20 +62,17 @@ public class DFS {
 /*
 OUTPUT:
 -------
-Enter no. of edges : 12
+Enter no of vertices : 5
+Enter no. of edges : 8
 Enter edges :
-1 2
-2 1
+0 1
+1 0
+0 2
+2 0
 1 3
 3 1
 1 4
 4 1
-2 5
-5 2
-3 5
-5 3
-4 5
-5 4
-Enter Source Vertex : 1
-The DFS Traversal is 1 2 5 3 4
+Enter Source Vertex : 0
+The DFS Traversal is 0 1 3 4 2
 */
