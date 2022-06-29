@@ -53,7 +53,7 @@ class DFS
 		int s = sc.nextInt();
 		System.out.print("The DFS Traversal is ");
 		boolean[] visited = new boolean[nv];
-		g.DFSs(s,visited);
+		g.DFSTraversal(s,visited);
 		System.out.println();
 		sc.close();
 	}
